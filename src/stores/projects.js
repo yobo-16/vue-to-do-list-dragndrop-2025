@@ -1,6 +1,7 @@
-import { ref, computed, reactive } from 'vue'
+import { reactive } from 'vue'
 import { defineStore } from 'pinia'
-import {getAllProjects, createProject} from '@/api/supabase/projectsApi.js'
+import { getAllProjects, createProject } from '@/api/supabase/projectsApi.js'
+import { supabase } from '@/api/supabase'
 
 export const useProjectsStore = defineStore('projects', () => {
     const projects = reactive([])
@@ -10,11 +11,11 @@ export const useProjectsStore = defineStore('projects', () => {
     // Actions
 
     // Fetch
-     async function fetchProjects(){
+    async function fetchProjects() {
         try {
             const data = await getAllProjects();
-            projects.push(...data);            
-            
+            projects.push(...data);
+
         } catch (error) {
             console.error(error);
         }
@@ -23,15 +24,31 @@ export const useProjectsStore = defineStore('projects', () => {
     // Add project
     async function addProject(title, description, priority, status, deadline) {
         try {
-            const data = await createProject(title, description, priority, status, deadline);
+            // Obtengoo el user autenticado
+            const user = supabase.auth.user();
+            if (!user) {
+                throw new Error("User not authenticated");
+            }
+            const {data, error} = await createProject(
+                title,
+                description,
+                priority,
+                status,
+                deadline,
+                user.id
+            );
+            if (error) {
+                throw new Error(error.message);
+            }
+            // Agrego el nuevo proyecto al array de proyectos
             projects.push(...data);
-            
+
         } catch (error) {
             console.error(error);
         }
     }
-    
-  
+
+
     return {
         // Estado
         projects,
@@ -40,4 +57,4 @@ export const useProjectsStore = defineStore('projects', () => {
         fetchProjects,
         addProject
     }
-  })
+})

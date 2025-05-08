@@ -26,7 +26,7 @@ export const getAllProjects = async () =>{
 
 // Funtion tu create project
 
-export const createProject = async (title, description, priority, status, deadline) => {
+export const createProject = async (title, description, priority, status, deadline, user_id) => {
 
     try {
 
@@ -34,7 +34,15 @@ export const createProject = async (title, description, priority, status, deadli
 
         const { data, error } = await supabase
             .from(TABLE_NAME)
-            .insert({title, description, priority, status, deadline, user_id:"f4e94541-0211-4446-aa79-18c23e3b3b18" })
+            .insert({
+                title,
+                description,
+                priority,
+                status,
+                deadline,
+                user_id
+                //user_id:"f4e94541-0211-4446-aa79-18c23e3b3b18"
+            })
             .select()
 
             return data;
