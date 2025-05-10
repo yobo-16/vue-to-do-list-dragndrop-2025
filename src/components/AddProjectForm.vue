@@ -59,7 +59,7 @@ const _handleSubmit =  async() =>{
 
         <hr>
 
-        <button type="submit">Add Project</button>
+        <button class="btn btn-secondary m-4" type="submit">Add Project</button>
 
 
     </form>

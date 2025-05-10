@@ -35,6 +35,7 @@ export const useAuthStore = defineStore("auth",{
             if (error) throw error;
             this.user = null;
           },
+        //   UNDEFNED AND NULL TO COMMENT WITH NACH
           async fetchUser() {
             const { data: { user } } = await supabase.auth.getUser();
             this.user = user;
