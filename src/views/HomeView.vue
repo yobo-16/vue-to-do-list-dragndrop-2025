@@ -9,6 +9,8 @@ const isLogin = ref(true); // Controla si el formulario está en modo login o re
 const toggleAuthMode = () => {
   isLogin.value = !isLogin.value;
 };
+console.log("_________")
+console.log(isLogin.value);
 
 // Cerrar el modal
 const closeModal = () => {

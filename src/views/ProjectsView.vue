@@ -39,7 +39,7 @@ const handleAddProject = async (projectData) => {
             <h2>Projects</h2>
             <div>
                 <ul>
-                    <li v-for="project in projects" :key="project.id">{{ project.title }}</li>
+                    <li v-for="project in projects" :key="project.id">{{ project.title }} {{ console.log(project) }}</li>
                 </ul>
             </div>
         </section>
