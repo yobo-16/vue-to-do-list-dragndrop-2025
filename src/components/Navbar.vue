@@ -1,7 +1,7 @@
 
 <script setup>
 import { useAuthStore } from "@/stores/auth";
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router'
 
@@ -12,8 +12,17 @@ const { user } = storeToRefs(authStore);
 
 console.log("Usuario en Navbar.vue:", user.value);
 
-email.value = user.value !== null ? user.value.email.toUpperCase().charAt(0) : "AI";
-console.log(email);
+watch(
+  () => user.value,
+  (newUser) => {
+    if (newUser && newUser.email) {
+      email.value = newUser.email.toUpperCase().charAt(0); // Primera letra del correo
+    } else {
+      email.value = "AI"; 
+    }
+  },
+  { immediate: true } // Ejecuta el watcher inmediatamente al cargar el componente
+);
 
 
 

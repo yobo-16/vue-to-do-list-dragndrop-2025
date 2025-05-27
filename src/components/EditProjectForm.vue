@@ -1,13 +1,35 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
-const emit = defineEmits(["submit-project", "close-modal"]);
+const emit = defineEmits(["submit-edit", "close-modal"]);
+
+const props = defineProps({
+  project: {
+    type: Object,
+    required: true, // El proyecto a editar es obligatorio
+  },
+});
 
 const title = ref("");
 const description = ref("");
 const priority = ref("");
 const status = ref("");
 const deadline = ref("");
+
+// Actualiza los campos del formulario cuando cambie el proyecto
+watch(
+  () => props.project,
+  (newProject) => {
+    if (newProject) {
+      title.value = newProject.title || "";
+      description.value = newProject.description || "";
+      priority.value = newProject.priority || "";
+      status.value = newProject.status || "";
+      deadline.value = newProject.deadline || "";
+    }
+  },
+  { immediate: true }
+);
 
 // Función para cerrar el modal
 const closeModal = () => {
@@ -16,7 +38,7 @@ const closeModal = () => {
 
 // Función para manejar el envío del formulario
 const _handleSubmit = async () => {
-  const data = {
+  const updatedData = {
     title: title.value,
     description: description.value,
     priority: priority.value,
@@ -24,17 +46,10 @@ const _handleSubmit = async () => {
     deadline: deadline.value,
   };
 
-  console.log("Datos del formulario enviados:", data);
+  console.log("Datos del formulario de edición enviados:", updatedData);
 
-  // Emitir el evento con los datos del formulario
-  emit("submit-project", data);
-
-  // Limpiar los campos del formulario
-  title.value = "";
-  description.value = "";
-  priority.value = "";
-  status.value = "";
-  deadline.value = "";
+  // Emitir el evento con los datos actualizados
+  emit("submit-edit", updatedData);
 
   // Cerrar el modal
   closeModal();
@@ -47,7 +62,7 @@ const _handleSubmit = async () => {
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
   >
     <div class="w-full max-w-[90%] sm:max-w-2xl rounded-lg bg-white p-6 shadow-lg">
-      <h2 class="text-lg font-semibold text-gray-900">Crear Proyecto</h2>
+      <h2 class="text-lg font-semibold text-gray-900">Editar Proyecto</h2>
       <form @submit.prevent="_handleSubmit" class="mt-4 space-y-6">
         <!-- Task Title -->
         <div>

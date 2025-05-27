@@ -1,52 +1,108 @@
 <script setup>
-import { onMounted } from 'vue';
-import AddProjectForm from '@/components/AddProjectForm.vue';
-import { useProjectsStore } from '@/stores/projects';
-import { storeToRefs } from 'pinia';
+import { onMounted, ref } from "vue";
+import AddProjectForm from "@/components/AddProjectForm.vue";
+import EditProjectForm from "@/components/EditProjectForm.vue";
+import { useProjectsStore } from "@/stores/projects";
+import { storeToRefs } from "pinia";
 
 const projectsStore = useProjectsStore();
 const { projects } = storeToRefs(projectsStore);
 
+const isModalOpen = ref(false); // Controla la visibilidad del modal de agregar proyectos
+const isEditModalOpen = ref(false); // Controla la visibilidad del modal de edición
+const projectToEdit = ref(null); // Almacena el proyecto seleccionado para editar
 
-onMounted(()=>{
-    projectsStore.fetchProjects();
-})
+onMounted(() => {
+  projectsStore.fetchProjects();
+});
 
+// Maneja la apertura del modal de edición
+const openEditModal = (project) => {
+  projectToEdit.value = project; // Asigna el proyecto seleccionado
+  isEditModalOpen.value = true; // Abre el modal
+};
+
+// Maneja el envío del formulario de edición
+const handleEditProject = async (updatedProjectData) => {
+  try {
+    console.log("handleEditProject llamado con:", updatedProjectData); // Depuración
+    await projectsStore.updateProject(projectToEdit.value.id, updatedProjectData);
+    console.log("Proyecto editado exitosamente:", projectToEdit.value.id); // Depuración
+    isEditModalOpen.value = false; // Cierra el modal después de editar
+    projectToEdit.value = null; // Limpia el proyecto seleccionado
+  } catch (error) {
+    console.error("Error editando proyecto:", error);
+  }
+};
+
+// Maneja el envío del formulario de agregar proyecto
 const handleAddProject = async (projectData) => {
-    try {
-        await projectsStore.addProject(
-            projectData.title,
-            projectData.description,
-            projectData.priority,
-            projectData.status,
-            projectData.deadline
-        );
-
-        console.log(projectData);
-        console.log(projectsStore.projects);
-    } catch (error) {
-        console.error('Error adding project:', error);
-    }
-}; 
+  try {
+    console.log("handleAddProject llamado con:", projectData); // Depuración
+    await projectsStore.addProject(
+      projectData.title,
+      projectData.description,
+      projectData.priority,
+      projectData.status,
+      projectData.deadline
+    );
+    isModalOpen.value = false; // Cierra el modal después de agregar
+  } catch (error) {
+    console.error("Error agregando proyecto:", error);
+  }
+};
 </script>
 
 <template>
-    <div>
-        <h1>PROJECTS VIEW</h1>
-        <AddProjectForm @submit-project="handleAddProject"/>  
+  <div>
+    <h1>PROJECTS VIEW</h1>
 
-        <section>
-            <h2>Projects</h2>
-            <div>
-                <ul>
-                    <li v-for="project in projects" :key="project.id">{{ project.title }} {{ console.log(project) }}</li>
-                </ul>
-            </div>
-        </section>
-    </div>
-    
+    <!-- Botón para agregar un proyecto -->
+    <button
+      @click="isModalOpen = true"
+      class="mb-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline focus:outline-2 focus:outline-indigo-600"
+    >
+      Add Project
+    </button>
+
+    <section>
+      <h2 class="text-5xl">Projects</h2>
+      <div>
+        <ul>
+          <li
+            class="bg-sky-800 w-fit my-3 text-white px-2 text-3xl"
+            v-for="project in projects"
+            :key="project.id"
+          >
+            {{ project.title }}
+            <span class="text-xl text-amber-50">{{ project.description }}</span>
+            <!-- Botón para editar -->
+            <button
+              @click="openEditModal(project)"
+              class="ml-4 rounded bg-yellow-500 px-2 py-1 text-sm text-white"
+            >
+              Edit
+            </button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Modal para agregar proyecto -->
+    <AddProjectForm
+      v-if="isModalOpen"
+      @submit-project="handleAddProject"
+      @close-modal="isModalOpen = false"
+    />
+
+    <!-- Modal para editar proyecto -->
+    <EditProjectForm
+      v-if="isEditModalOpen"
+      :project="projectToEdit"
+      @submit-edit="handleEditProject"
+      @close-modal="isEditModalOpen = false"
+    />
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
