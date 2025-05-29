@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import AddProjectForm from "@/components/AddProjectForm.vue";
 import EditProjectForm from "@/components/EditProjectForm.vue";
+import DeleteProjectModal from "@/components/DeleteProjectModal.vue";
 import { useProjectsStore } from "@/stores/projects";
 import { storeToRefs } from "pinia";
 
@@ -10,7 +11,9 @@ const { projects } = storeToRefs(projectsStore);
 
 const isModalOpen = ref(false); // Controla la visibilidad del modal de agregar proyectos
 const isEditModalOpen = ref(false); // Controla la visibilidad del modal de edición
+const isDeleteModalOpen = ref(false); // Controla la visibilidad del modal de eliminación
 const projectToEdit = ref(null); // Almacena el proyecto seleccionado para editar
+const projectToDelete = ref(null); // Almacena el proyecto seleccionado para eliminar
 
 onMounted(() => {
   projectsStore.fetchProjects();
@@ -20,6 +23,24 @@ onMounted(() => {
 const openEditModal = (project) => {
   projectToEdit.value = project; // Asigna el proyecto seleccionado
   isEditModalOpen.value = true; // Abre el modal
+};
+
+// Maneja la apertura del modal de eliminación
+const openDeleteModal = (project) => {
+  projectToDelete.value = project; // Asigna el proyecto seleccionado
+  isDeleteModalOpen.value = true; // Abre el modal
+};
+
+// Maneja la confirmación de eliminación
+const handleDeleteProject = async (projectId) => {
+  try {
+    console.log("Eliminando proyecto con ID:", projectId); // Depuración
+    await projectsStore.deleteProject(projectId); // Llama a la función de eliminación en la store
+    isDeleteModalOpen.value = false; // Cierra el modal después de eliminar
+    projectToDelete.value = null; // Limpia el proyecto seleccionado
+  } catch (error) {
+    console.error("Error eliminando proyecto:", error);
+  }
 };
 
 // Maneja el envío del formulario de edición
@@ -83,6 +104,13 @@ const handleAddProject = async (projectData) => {
             >
               Edit
             </button>
+            <!-- Botón para eliminar -->
+            <button
+              @click="openDeleteModal(project)"
+              class="ml-4 rounded bg-red-600 px-2 py-1 text-sm text-white"
+            >
+              Delete
+            </button>
           </li>
         </ul>
       </div>
@@ -101,6 +129,14 @@ const handleAddProject = async (projectData) => {
       :project="projectToEdit"
       @submit-edit="handleEditProject"
       @close-modal="isEditModalOpen = false"
+    />
+
+    <!-- Modal para eliminar proyecto -->
+    <DeleteProjectModal
+      v-if="isDeleteModalOpen"
+      :project="projectToDelete"
+      @confirm-delete="handleDeleteProject"
+      @close-modal="isDeleteModalOpen = false"
     />
   </div>
 </template>

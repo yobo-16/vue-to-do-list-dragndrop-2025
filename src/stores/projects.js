@@ -78,10 +78,38 @@ export const useProjectsStore = defineStore("projects", () => {
     }
   }
 
+  // Delete Project
+
+  async function deleteProject(id) {
+    try {
+      console.log("Eliminando proyecto con ID:", id);
+  
+      const { data, error } = await supabase
+        .from('Projects') // Usa comillas dobles para nombres con mayúsculas
+        .delete()
+        .eq("id", id);
+  
+      if (error) {
+        console.error("Error al eliminar proyecto en Supabase:", error.message);
+        throw error;
+      }
+  
+      console.log("Proyecto eliminado en Supabase:", data);
+  
+      const index = projects.findIndex((project) => project.id === id);
+      if (index !== -1) {
+        projects.splice(index, 1); // Elimina el proyecto de la lista local
+      }
+    } catch (error) {
+      console.error("Error eliminando proyecto:", error.message);
+    }
+  }
+
   return {
     projects,
     fetchProjects,
     addProject,
     updateProject,
+    deleteProject,
   };
 });
