@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue";
 import AddProjectForm from "@/components/AddProjectForm.vue";
 import EditProjectForm from "@/components/EditProjectForm.vue";
 import DeleteProjectModal from "@/components/DeleteProjectModal.vue";
+import TaskColumn from "@/components/TaskColumn.vue";
 import { useProjectsStore } from "@/stores/projects";
 import { storeToRefs } from "pinia";
 
@@ -31,7 +32,7 @@ const openDeleteModal = (project) => {
   isDeleteModalOpen.value = true; // Abre el modal
 };
 
-// Maneja la confirmación de eliminación
+// confirmación de eliminación
 const handleDeleteProject = async (projectId) => {
   try {
     console.log("Eliminando proyecto con ID:", projectId); // Depuración
@@ -56,7 +57,7 @@ const handleEditProject = async (updatedProjectData) => {
   }
 };
 
-// Maneja el envío del formulario de agregar proyecto
+//  formulario de agregar proyecto
 const handleAddProject = async (projectData) => {
   try {
     console.log("handleAddProject llamado con:", projectData); // Depuración
@@ -86,34 +87,32 @@ const handleAddProject = async (projectData) => {
       Add Project
     </button>
 
-    <section>
-      <h2 class="text-5xl">Projects</h2>
-      <div>
-        <ul>
-          <li
-            class="bg-sky-800 w-fit my-3 text-white px-2 text-3xl"
-            v-for="project in projects"
-            :key="project.id"
-          >
-            {{ project.title }}
-            <span class="text-xl text-amber-50">{{ project.description }}</span>
-            <!-- Botón para editar -->
-            <button
-              @click="openEditModal(project)"
-              class="ml-4 rounded bg-yellow-500 px-2 py-1 text-sm text-white"
-            >
-              Edit
-            </button>
-            <!-- Botón para eliminar -->
-            <button
-              @click="openDeleteModal(project)"
-              class="ml-4 rounded bg-red-600 px-2 py-1 text-sm text-white"
-            >
-              Delete
-            </button>
-          </li>
-        </ul>
-      </div>
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Renderizar columnas -->
+      <TaskColumn
+        title="Backlog"
+        :projects="projects.filter(project => project.status === 'Backlog')"
+        @edit-project="openEditModal"
+        @delete-project="openDeleteModal"
+      />
+      <TaskColumn
+        title="To do"
+        :projects="projects.filter(project => project.status === 'To do')"
+        @edit-project="openEditModal"
+        @delete-project="openDeleteModal"
+      />
+      <TaskColumn
+        title="Doing"
+        :projects="projects.filter(project => project.status === 'Doing')"
+        @edit-project="openEditModal"
+        @delete-project="openDeleteModal"
+      />
+      <TaskColumn
+        title="Done"
+        :projects="projects.filter(project => project.status === 'Done')"
+        @edit-project="openEditModal"
+        @delete-project="openDeleteModal"
+      />
     </section>
 
     <!-- Modal para agregar proyecto -->
