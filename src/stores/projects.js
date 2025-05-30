@@ -51,13 +51,41 @@ export const useProjectsStore = defineStore("projects", () => {
   }
 
   // Update project
+  // async function updateProject(id, updatedData) {
+  //   try {
+  //     console.log("Actualizando proyecto con ID:", id);
+  //     console.log("Datos actualizados:", updatedData);
+  
+  //     const { data, error } = await supabase
+  //       .from('Projects') // Usa comillas dobles para nombres con mayúsculas
+  //       .update(updatedData)
+  //       .eq("id", id)
+  //       .select();
+  
+  //     if (error) {
+  //       console.error("Error al actualizar proyecto en Supabase:", error.message);
+  //       throw error;
+  //     }
+  
+  //     console.log("Proyecto actualizado en Supabase:", data);
+  
+  //     const index = projects.findIndex((project) => project.id === id);
+  //     if (index !== -1) {
+  //       projects[index] = { ...projects[index], ...updatedData };
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating project:", error.message);
+  //   }
+  // }
+
+
   async function updateProject(id, updatedData) {
     try {
       console.log("Actualizando proyecto con ID:", id);
       console.log("Datos actualizados:", updatedData);
   
       const { data, error } = await supabase
-        .from('Projects') // Usa comillas dobles para nombres con mayúsculas
+        .from("Projects")
         .update(updatedData)
         .eq("id", id)
         .select();
@@ -71,7 +99,7 @@ export const useProjectsStore = defineStore("projects", () => {
   
       const index = projects.findIndex((project) => project.id === id);
       if (index !== -1) {
-        projects[index] = { ...projects[index], ...updatedData };
+        projects[index] = { ...projects[index], ...updatedData }; // Actualiza el proyecto localmente
       }
     } catch (error) {
       console.error("Error updating project:", error.message);
@@ -113,3 +141,5 @@ export const useProjectsStore = defineStore("projects", () => {
     deleteProject,
   };
 });
+
+// Test

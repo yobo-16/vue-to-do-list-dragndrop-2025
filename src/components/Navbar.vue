@@ -63,8 +63,8 @@ const handleLogout = async () =>{
         </div>
 
         <div class="navbar-end">
-          <div class="dropdown dropdown-end bg-secondary">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar bg-blue-900 flex justify-center items-center">
+          <div class="dropdown dropdown-end ">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar flex justify-center items-center">
               <div class="">
                 <!-- <img alt=""
                   src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" /> -->

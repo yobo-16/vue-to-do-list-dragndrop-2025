@@ -50,6 +50,7 @@ const _handleSubmit = async () => {
 
   // Emitir el evento con los datos actualizados
   emit("submit-edit", updatedData);
+  console.log("Datos emitidos desde el modal de edición:", updatedData);
 
   // Cerrar el modal
   closeModal();
