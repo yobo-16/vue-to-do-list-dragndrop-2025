@@ -17,7 +17,10 @@ const projectToEdit = ref(null)
 const projectToDelete = ref(null)
 
 onMounted(() => {
-    projectsStore.fetchProjects()
+    // projectsStore.fetchProjects()
+    if (projectsStore.projects.length === 0) {
+        projectsStore.fetchProjects()
+    }
 })
 
 const openEditModal = (project) => {

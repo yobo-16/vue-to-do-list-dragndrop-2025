@@ -2,6 +2,8 @@
 <script setup>
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router"; // Importa useRouter para manejar la redirección
+
 
 const props = defineProps({
   isLogin: {
@@ -13,6 +15,7 @@ const props = defineProps({
 const emit = defineEmits(["close-modal"]);
 
 const authStore = useAuthStore();
+const router = useRouter();
 const email = ref("");
 const password = ref("");
 
@@ -26,6 +29,7 @@ const _handleSubmit = async () => {
       alert("Registro exitoso");
     }
     emit("close-modal"); // Cerrar el modal después de la acción
+    router.push("/projects");
   } catch (error) {
     console.error("Error:", error);
     alert("Error: " + error.message);

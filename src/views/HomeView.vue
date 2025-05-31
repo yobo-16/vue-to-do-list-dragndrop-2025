@@ -1,16 +1,19 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import AuthForm from "@/components/AuthForm.vue";
+
 
 const showAuth = ref(false); // Controla la visibilidad del modal
 const isLogin = ref(true); // Controla si el formulario está en modo login o registro
+
+
+
 
 // Alternar entre login y registro
 const toggleAuthMode = () => {
   isLogin.value = !isLogin.value;
 };
-console.log("_________")
-console.log(isLogin.value);
+
 
 // Cerrar el modal
 const closeModal = () => {

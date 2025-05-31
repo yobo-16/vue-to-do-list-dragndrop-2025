@@ -19,6 +19,7 @@ const localProjects = ref([...props.projects])
 
 watch(() => props.projects, (newVal) => {
     localProjects.value = [...newVal]
+
 }, { deep: true })
 
 const [container, items] = useDragAndDrop(localProjects, {
@@ -65,6 +66,7 @@ const isOver = ref(false)
                     </span>
                 </div>
                 <p class="text-sm text-gray-600">{{ project.description }}</p>
+                <p class="text-sm text-gray-400">{{ project.deadline }}</p>
                 <div class="mt-2 flex gap-x-2">
                     <button @click="emit('edit-project', project)"
                         class="rounded bg-yellow-500 px-2 py-1 text-sm text-white">

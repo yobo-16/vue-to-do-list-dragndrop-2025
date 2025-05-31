@@ -3,12 +3,13 @@
 import { useAuthStore } from "@/stores/auth";
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia';
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
 const email = ref("AI");
 
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore); 
+const router = useRouter();
 
 console.log("Usuario en Navbar.vue:", user.value);
 
@@ -32,7 +33,8 @@ const handleLogout = async () =>{
     try {
 
         await authStore.logout();
-        console.log("Logout successful");
+        alert("Logout successful");
+        router.push("/");
     } catch (error) {
         console.error("Error during logout:", error);
         
@@ -56,7 +58,11 @@ const handleLogout = async () =>{
             <ul tabIndex={0} class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
               <RouterLink to="/">Home</RouterLink>
               <RouterLink to="/about">About</RouterLink>
-              <RouterLink to="/projects">Projects</RouterLink>
+              <RouterLink to="/projects"
+                :class="user ? 'text-black' : 'text-gray-400 cursor-not-allowed pointer-events-none'"
+              >
+                Projects
+              </RouterLink>
 
             </ul>
           </div>

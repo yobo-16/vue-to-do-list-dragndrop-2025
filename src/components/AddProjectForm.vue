@@ -44,7 +44,7 @@ const _handleSubmit = async () => {
 <template>
   <!-- Modal -->
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/75"
   >
     <div class="w-full max-w-[90%] sm:max-w-2xl rounded-lg bg-white p-6 shadow-lg">
       <h2 class="text-lg font-semibold text-gray-900">Crear Proyecto</h2>
