@@ -1,9 +1,19 @@
 <script setup>
 import { onMounted, ref } from "vue"
-import AddProjectForm from "@/components/AddProjectForm.vue"
-import EditProjectForm from "@/components/EditProjectForm.vue"
-import DeleteProjectModal from "@/components/DeleteProjectModal.vue"
-import TaskColumn from "@/components/TaskColumn.vue"
+
+// Componentes
+import {
+    AddProjectForm,
+    EditProjectForm,
+    DeleteProjectModal,
+    DashboardBar,
+    TaskColumn,
+} from "@/components"
+// import AddProjectForm from "@/components/AddProjectForm.vue"
+// import EditProjectForm from "@/components/EditProjectForm.vue"
+// import DeleteProjectModal from "@/components/DeleteProjectModal.vue"
+// import TaskColumn from "@/components/TaskColumn.vue"
+
 import { useProjectsStore } from "@/stores/projects"
 import { storeToRefs } from "pinia"
 
@@ -83,12 +93,33 @@ const handleAddProject = async (projectData) => {
 </script>
 
 <template>
+
+    <DashboardBar >
+
+        <template #add-project>
+            <button @click="isModalOpen = true"
+                    class=" rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+                    Add Project
+            </button>
+
+        </template>
+
+
+
+    </DashboardBar>
+    
     <div class="max-w-[90%] mx-auto">
-        <h1>PROJECTS VIEW</h1>
-        <button @click="isModalOpen = true"
-            class="mb-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
-            Add Project
-        </button>
+        
+                <!-- <button @click="isModalOpen = true"
+                    class="mb-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+                    Add Project
+                </button> -->
+        <div>
+
+
+
+        </div>
+
 
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <TaskColumn v-for="status in ['Backlog', 'To do', 'Doing', 'Done']" :key="status" :title="status"
@@ -104,3 +135,5 @@ const handleAddProject = async (projectData) => {
             @close-modal="isDeleteModalOpen = false" />
     </div>
 </template>
+
+<!-- test -->

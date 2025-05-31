@@ -24,6 +24,12 @@ const router = createRouter({
         requiresAuth: true,
       },
     },
+    {
+      path: '/ejemplos',
+      name: 'ejemplos',
+      component: () => import('../components/Ejemplos.vue'),
+
+    },
   ],
 });
 

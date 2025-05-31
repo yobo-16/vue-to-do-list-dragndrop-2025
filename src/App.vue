@@ -4,7 +4,6 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useAuthStore } from "@/stores/auth";
 
 import Navbar from '@/components/Navbar.vue';
-
 const authStore = useAuthStore();
 
 // Obtenemos el user en toda la app
@@ -18,6 +17,7 @@ console.log("Usuario sincronizado en App.vue:", authStore.user);
 <template>
   <header>
     <Navbar />
+
     
 
   </header>
