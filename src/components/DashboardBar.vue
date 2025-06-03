@@ -1,4 +1,7 @@
 <script setup>
+import { defineEmits } from "vue";
+
+const emit = defineEmits(["filter-search"]); 
 </script>
 
 <template>
@@ -11,6 +14,7 @@
         <input
           type="text"
           placeholder="Buscar..."
+          @input="emit('filter-search', $event.target.value)"
           class="px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
         <button class="ml-2 px-4 py-2 bg-indigo-600 rounded-md hover:bg-indigo-500 transition">
