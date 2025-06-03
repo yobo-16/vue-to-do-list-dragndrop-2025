@@ -23,6 +23,7 @@ const projectToEdit = ref(null);
 const projectToDelete = ref(null);
 
 const searchQuery = ref(""); // Texto del buscador
+const selectedPriority = ref(""); // Prioridad seleccionada
 
 onMounted(() => {
   if (projectsStore.projects.length === 0) {
@@ -30,11 +31,16 @@ onMounted(() => {
   }
 });
 
-// Computed para filtrar proyectos por título
+// Computed para filtrar proyectos por título y prioridad
 const filteredProjects = computed(() => {
-  return projects.value.filter((project) =>
-    project.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
+  return projects.value.filter((project) => {
+    const matchesSearch =
+      searchQuery.value === "" ||
+      project.title.toLowerCase().includes(searchQuery.value.toLowerCase());
+    const matchesPriority =
+      selectedPriority.value === "" || project.priority === selectedPriority.value;
+    return matchesSearch && matchesPriority;
+  });
 });
 
 const openEditModal = (project) => {
@@ -100,12 +106,13 @@ const handleAddProject = async (projectData) => {
   <div>
     <!-- Barra del dashboard -->
     <DashboardBar
-      @filter-search="searchQuery = $event" 
+      @filter-search="searchQuery = $event"
+      @filter-priority="selectedPriority = $event"
     >
       <template #add-project>
         <button
           @click="isModalOpen = true"
-          class=" rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+          class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
         >
           Add Project
         </button>
