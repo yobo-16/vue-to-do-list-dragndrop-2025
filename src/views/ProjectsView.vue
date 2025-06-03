@@ -112,7 +112,7 @@ const handleAddProject = async (projectData) => {
       <template #add-project>
         <button
           @click="isModalOpen = true"
-          class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+          class="btn-add-project rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500  "
         >
           Add Project
         </button>
@@ -120,8 +120,8 @@ const handleAddProject = async (projectData) => {
     </DashboardBar>
 
     <!-- Contenido principal -->
-    <div class="max-w-[90%] mx-auto">
-      <h1>PROJECTS VIEW</h1>
+    <div class="max-w-[90%] mx-auto my-4">
+      
 
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <TaskColumn
@@ -156,3 +156,13 @@ const handleAddProject = async (projectData) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.btn-add-project[data-v-076d98d6]{
+    
+    @media screen and (max-width: 640px) {
+        background: red !important;
+        width: 100%;
+    }    
+}
+</style>
