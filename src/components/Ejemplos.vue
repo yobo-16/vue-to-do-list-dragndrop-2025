@@ -4,44 +4,126 @@
 </script>
 
 <template>
-<div class="lg:flex min-h-screen">
-  <aside class="grow-0 bg-teal-800 pl-7 pr-16 pb-12 sm:pl-16 sm:pr-24 sm:pb-12 lg:pb-16 relative grid">
-    <div>
-      <img src="https://images.pexels.com/photos/2787341/pexels-photo-2787341.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Miranda" class="aside__img rounded-full w-28 h-28 md:w-32 md:h-32 object-cover shadow-lg absolute top-12">
-      <h2 class="mt-44 md:mt-52 font-semibold text-3xl leading-none">Miranda</h2>
-      <span class="capitalize text-gray-500 text-sm">lead designer</span>
-      <p class="mt-3 flex items-center text-sm"><span class="w-3 h-3 bg-green-400 block rounded-full mr-1.5"></span>Online</p>
-    </div>
-    <nav class="mt-12 md:mt-10 lg:mt-0">
-      <ul class="flex flex-wrap lg:grid gap-3">
-        <li class="flex items-center text-gray-600 hover:text-red-400"><a href="#" class="capitalize flex items-center text-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>work</a></li>
-        <li class="flex items-center text-gray-600 hover:text-red-400"><a href="#" class="capitalize flex items-center text-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-            </svg>plan</a></li>
-        <li class="flex items-center text-gray-600 hover:text-red-400"><a href="#" class="capitalize flex items-center text-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>stats</a></li>
-        <li class="flex items-center text-gray-600 hover:text-red-400"><a href="#" class="capitalize flex items-center text-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>documents</a></li>
-        <li class="flex items-center text-gray-600 hover:text-red-400"><a href="#" class="capitalize flex items-center text-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>users</a></li>
-        <li class="flex items-center text-gray-600 hover:text-red-400"><a href="#" class="capitalize flex items-center text-lg"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>settings</a></li>
-      </ul>
 
-      <slot name="add-project"></slot>
-    </nav>
-    <a href="#" class="uppercase font-semibold text-gray-600 hover:text-gray-900 self-end text-right lg:text-left mt-10 lg:mt-0">log out</a>
-  </aside>
-  
-</div>
-  </template>
+    <div class="space-y-4">
+    <details class="group relative overflow-hidden rounded border border-gray-300 shadow-sm">
+        <summary
+        class="flex items-center justify-between gap-2 p-3 text-gray-700 transition-colors hover:text-gray-900 [&::-webkit-details-marker]:hidden"
+        >
+        <span class="text-sm font-medium"> Availability </span>
+
+        <span class="transition-transform group-open:-rotate-180">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-4"
+            >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+        </span>
+        </summary>
+
+        <div class="divide-y divide-gray-300 border-t border-gray-300 bg-white">
+        <div class="flex items-center justify-between px-3 py-2">
+            <span class="text-sm text-gray-700"> 0 Selected </span>
+
+            <button
+            type="button"
+            class="text-sm text-gray-700 underline transition-colors hover:text-gray-900"
+            >
+            Reset
+            </button>
+        </div>
+
+        <fieldset class="p-3">
+            <legend class="sr-only">Checkboxes</legend>
+
+            <div class="flex flex-col items-start gap-3">
+            <label for="Option1" class="inline-flex items-center gap-3">
+                <input type="checkbox" class="size-5 rounded border-gray-300 shadow-sm" id="Option1" />
+
+                <span class="text-sm font-medium text-gray-700"> Option 1 </span>
+            </label>
+
+            <label for="Option2" class="inline-flex items-center gap-3">
+                <input type="checkbox" class="size-5 rounded border-gray-300 shadow-sm" id="Option2" />
+
+                <span class="text-sm font-medium text-gray-700"> Option 2 </span>
+            </label>
+
+            <label for="Option3" class="inline-flex items-center gap-3">
+                <input type="checkbox" class="size-5 rounded border-gray-300 shadow-sm" id="Option3" />
+
+                <span class="text-sm font-medium text-gray-700"> Option 3 </span>
+            </label>
+            </div>
+        </fieldset>
+        </div>
+    </details>
+
+    <details class="group relative overflow-hidden rounded border border-gray-300 shadow-sm">
+        <summary
+        class="flex items-center justify-between gap-2 p-3 text-gray-700 transition-colors hover:text-gray-900 [&::-webkit-details-marker]:hidden"
+        >
+        <span class="text-sm font-medium"> Price </span>
+
+        <span class="transition-transform group-open:-rotate-180">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-4"
+            >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+        </span>
+        </summary>
+
+        <div class="divide-y divide-gray-300 border-t border-gray-300 bg-white">
+        <div class="flex items-center justify-between px-3 py-2">
+            <span class="text-sm text-gray-700"> Max price is $600 </span>
+
+            <button
+            type="button"
+            class="text-sm text-gray-700 underline transition-colors hover:text-gray-900"
+            >
+            Reset
+            </button>
+        </div>
+
+        <div class="flex items-center gap-3 p-3">
+            <label for="MinPrice">
+            <span class="text-sm text-gray-700"> Min </span>
+
+            <input
+                type="number"
+                id="MinPrice"
+                value="0"
+                class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+            />
+            </label>
+
+            <label for="MaxPrice">
+            <span class="text-sm text-gray-700"> Max </span>
+
+            <input
+                type="number"
+                id="MaxPrice"
+                value="600"
+                class="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+            />
+            </label>
+        </div>
+        </div>
+    </details>
+    </div>
+
+</template>
 
   <style scoped>
 </style>

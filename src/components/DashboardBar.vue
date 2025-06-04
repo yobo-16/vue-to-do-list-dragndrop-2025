@@ -1,7 +1,7 @@
 <script setup>
 import { defineEmits } from "vue";
 
-const emit = defineEmits(["filter-search", "filter-priority"]); // Emitir el texto del buscador y la prioridad seleccionada
+const emit = defineEmits(["filter-search", "filter-priority", "filter-status"]); // Emitir el texto del buscador, la prioridad y el status seleccionado
 </script>
 
 <template>
@@ -18,43 +18,58 @@ const emit = defineEmits(["filter-search", "filter-priority"]); // Emitir el tex
 
       <!-- Filtros -->
       <div class="filter-container flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
-            <p class="text-sm text-gray-300">Filters:</p>
-            <!-- Filtro por prioridad -->
-            <select
-            @change="emit('filter-priority', $event.target.value)"
-            class="px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
-            >
-            <option value="">All Priorities</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-            </select>
+        <p class="text-sm text-gray-300">Filters:</p>
 
-            <!-- Buscador -->
-            <input
-            type="text"
-            placeholder="Buscar..."
-            @input="emit('filter-search', $event.target.value)"
-            class="px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
-            />
+        <!-- Filtro por prioridad -->
+        <select
+          @change="emit('filter-priority', $event.target.value)"
+          class="px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
+        >
+          <option value="">All Priorities</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+
+        <!-- Filtro por columnas -->
+        <select
+          @change="emit('filter-status', $event.target.value)"
+          class="filter-column px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
+        >
+          <option value="All Columns">All Columns</option>
+          <option value="Backlog">Backlog</option>
+          <option value="To do">To do</option>
+          <option value="Doing">Doing</option>
+          <option value="Done">Done</option>
+        </select>
+
+        <!-- Buscador -->
+        <input
+          type="text"
+          placeholder="Buscar..."
+          @input="emit('filter-search', $event.target.value)"
+          class="px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
+        />
       </div>
     </div>
   </nav>
 </template>
 
 <style scoped>
-/* Botón Add Project en mobile */
+
 slot[name="add-project"] {
   width: 100%;
 }
 
 @media (min-width: 640px) {
   slot[name="add-project"] {
-    width: 100%;
+    width: auto;
+  }
+  .filter-column{
+    display: none;
   }
 }
 
-/* Filtros en mobile */
 @media (max-width: 639px) {
   .flex-col {
     flex-direction: column;
@@ -64,12 +79,12 @@ slot[name="add-project"] {
     align-items: flex-start;
   }
 
-  .filter-container{
-    margin-bottom: 1rem; 
+  .filter-container {
+    margin-bottom: 1rem;
   }
 }
 
-/* Filtros en escritorio */
+
 @media (min-width: 640px) {
   .flex-row {
     flex-direction: row;
@@ -78,6 +93,9 @@ slot[name="add-project"] {
   .items-center {
     align-items: center;
   }
-  
+
+  .filter-column{
+    display: auto;
+  }
 }
 </style>

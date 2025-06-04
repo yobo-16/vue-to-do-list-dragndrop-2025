@@ -22,8 +22,9 @@ const isDeleteModalOpen = ref(false);
 const projectToEdit = ref(null);
 const projectToDelete = ref(null);
 
-const searchQuery = ref(""); // Texto del buscador
-const selectedPriority = ref(""); // Prioridad seleccionada
+const searchQuery = ref(""); //buscador
+const selectedPriority = ref(""); // Prioridad
+const selectedStatus = ref("All Columns"); // Columnas
 
 onMounted(() => {
   if (projectsStore.projects.length === 0) {
@@ -43,63 +44,13 @@ const filteredProjects = computed(() => {
   });
 });
 
-const openEditModal = (project) => {
-  projectToEdit.value = project;
-  isEditModalOpen.value = true;
-};
-
-const handleEditProject = async (updatedData) => {
-  try {
-    await projectsStore.updateProject(projectToEdit.value.id, updatedData);
-    isEditModalOpen.value = false;
-  } catch (error) {
-    console.error("Error actualizando proyecto:", error);
+// Computed para las columnas 
+const visibleStatuses = computed(() => {
+  if (selectedStatus.value === "All Columns") {
+    return ["Backlog", "To do", "Doing", "Done"];
   }
-};
-
-const openDeleteModal = (project) => {
-  projectToDelete.value = project;
-  isDeleteModalOpen.value = true;
-};
-
-const handleDeleteProject = async (projectId) => {
-  try {
-    await projectsStore.deleteProject(projectId);
-    isDeleteModalOpen.value = false;
-  } catch (error) {
-    console.error("Error eliminando proyecto:", error);
-  }
-};
-
-const handleMoveBetweenColumns = async ({ project, newStatus }) => {
-  if (project.status !== newStatus) {
-    console.log("Moviendo proyecto:", project.id, "→", newStatus);
-    try {
-      await projectsStore.updateProject(project.id, { status: newStatus });
-    } catch (error) {
-      console.error("Error actualizando status en Supabase:", error);
-    }
-  }
-};
-
-const handleReorderProjects = ({ status, items }) => {
-  console.log(`Reorden en columna ${status}:`, items.map((i) => i.id));
-};
-
-const handleAddProject = async (projectData) => {
-  try {
-    await projectsStore.addProject(
-      projectData.title,
-      projectData.description,
-      projectData.priority,
-      projectData.status,
-      projectData.deadline
-    );
-    isModalOpen.value = false;
-  } catch (error) {
-    console.error("Error agregando proyecto:", error);
-  }
-};
+  return [selectedStatus.value];
+});
 </script>
 
 <template>
@@ -108,11 +59,12 @@ const handleAddProject = async (projectData) => {
     <DashboardBar
       @filter-search="searchQuery = $event"
       @filter-priority="selectedPriority = $event"
+      @filter-status="selectedStatus = $event"
     >
       <template #add-project>
         <button
           @click="isModalOpen = true"
-          class="btn-add-project rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500  "
+          class="btn-add-project rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
         >
           Add Project
         </button>
@@ -121,11 +73,9 @@ const handleAddProject = async (projectData) => {
 
     <!-- Contenido principal -->
     <div class="max-w-[90%] mx-auto my-4">
-      
-
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <TaskColumn
-          v-for="status in ['Backlog', 'To do', 'Doing', 'Done']"
+          v-for="status in visibleStatuses"
           :key="status"
           :title="status"
           :projects="filteredProjects.filter((p) => p.status === status)"
@@ -166,3 +116,5 @@ const handleAddProject = async (projectData) => {
     }    
 }
 </style>
+
+<!-- Test -->
