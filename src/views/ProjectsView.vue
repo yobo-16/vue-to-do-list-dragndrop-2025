@@ -24,7 +24,7 @@ const projectToDelete = ref(null);
 
 const searchQuery = ref(""); // Texto del buscador
 const selectedPriority = ref(""); // Prioridad seleccionada
-const selectedStatus = ref("All Columns"); // Estado seleccionado (por defecto "All Columns")
+const selectedStatus = ref("All Columns"); // Estado 
 
 onMounted(() => {
   if (projectsStore.projects.length === 0) {
@@ -32,7 +32,7 @@ onMounted(() => {
   }
 });
 
-// Computed para filtrar proyectos por título y prioridad
+// Filtros
 const filteredProjects = computed(() => {
   return projects.value.filter((project) => {
     const matchesSearch =
@@ -44,7 +44,7 @@ const filteredProjects = computed(() => {
   });
 });
 
-// Computed para determinar las columnas a mostrar
+// columnas a mostrar
 const visibleStatuses = computed(() => {
   if (selectedStatus.value === "All Columns") {
     return ["Backlog", "To do", "Doing", "Done"];
@@ -52,7 +52,7 @@ const visibleStatuses = computed(() => {
   return [selectedStatus.value];
 });
 
-// Función para manejar el cambio de columna
+// cambio de columna
 const handleMoveBetweenColumns = async ({ project, newStatus }) => {
   if (project.status !== newStatus) {
     try {
@@ -64,7 +64,7 @@ const handleMoveBetweenColumns = async ({ project, newStatus }) => {
   }
 };
 
-// Función para manejar el reordenamiento de proyectos dentro de una columna
+
 const handleReorderProjects = ({ status, items }) => {
   console.log(`Proyectos reordenados en la columna ${status}:`, items.map((i) => i.id));
 };
@@ -85,13 +85,13 @@ const handleEditProject = async (updatedData) => {
   }
 };
 
-// Función para abrir el modal de eliminación
+// modal de eliminación
 const openDeleteModal = (project) => {
   projectToDelete.value = project;
   isDeleteModalOpen.value = true;
 };
 
-// Función para manejar la eliminación de un proyecto
+// eliminación de un proyecto
 const handleDeleteProject = async (projectId) => {
   try {
     await projectsStore.deleteProject(projectId);
@@ -101,7 +101,7 @@ const handleDeleteProject = async (projectId) => {
   }
 };
 
-// Función para manejar la adición de un proyecto
+// adición de un proyecto
 const handleAddProject = async (projectData) => {
   try {
     await projectsStore.addProject(
