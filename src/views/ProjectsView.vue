@@ -22,9 +22,9 @@ const isDeleteModalOpen = ref(false);
 const projectToEdit = ref(null);
 const projectToDelete = ref(null);
 
-const searchQuery = ref(""); //buscador
-const selectedPriority = ref(""); // Prioridad
-const selectedStatus = ref("All Columns"); // Columnas
+const searchQuery = ref(""); // Texto del buscador
+const selectedPriority = ref(""); // Prioridad seleccionada
+const selectedStatus = ref("All Columns"); // Estado seleccionado (por defecto "All Columns")
 
 onMounted(() => {
   if (projectsStore.projects.length === 0) {
@@ -44,13 +44,78 @@ const filteredProjects = computed(() => {
   });
 });
 
-// Computed para las columnas 
+// Computed para determinar las columnas a mostrar
 const visibleStatuses = computed(() => {
   if (selectedStatus.value === "All Columns") {
     return ["Backlog", "To do", "Doing", "Done"];
   }
   return [selectedStatus.value];
 });
+
+// Función para manejar el cambio de columna
+const handleMoveBetweenColumns = async ({ project, newStatus }) => {
+  if (project.status !== newStatus) {
+    try {
+      console.log(`Moviendo proyecto ${project.id} a la columna ${newStatus}`);
+      await projectsStore.updateProject(project.id, { status: newStatus });
+    } catch (error) {
+      console.error("Error actualizando el estado del proyecto:", error);
+    }
+  }
+};
+
+// Función para manejar el reordenamiento de proyectos dentro de una columna
+const handleReorderProjects = ({ status, items }) => {
+  console.log(`Proyectos reordenados en la columna ${status}:`, items.map((i) => i.id));
+};
+
+// Función para abrir el modal de edición
+const openEditModal = (project) => {
+  projectToEdit.value = project;
+  isEditModalOpen.value = true;
+};
+
+// Función para manejar la edición de un proyecto
+const handleEditProject = async (updatedData) => {
+  try {
+    await projectsStore.updateProject(projectToEdit.value.id, updatedData);
+    isEditModalOpen.value = false;
+  } catch (error) {
+    console.error("Error actualizando el proyecto:", error);
+  }
+};
+
+// Función para abrir el modal de eliminación
+const openDeleteModal = (project) => {
+  projectToDelete.value = project;
+  isDeleteModalOpen.value = true;
+};
+
+// Función para manejar la eliminación de un proyecto
+const handleDeleteProject = async (projectId) => {
+  try {
+    await projectsStore.deleteProject(projectId);
+    isDeleteModalOpen.value = false;
+  } catch (error) {
+    console.error("Error eliminando el proyecto:", error);
+  }
+};
+
+// Función para manejar la adición de un proyecto
+const handleAddProject = async (projectData) => {
+  try {
+    await projectsStore.addProject(
+      projectData.title,
+      projectData.description,
+      projectData.priority,
+      projectData.status,
+      projectData.deadline
+    );
+    isModalOpen.value = false;
+  } catch (error) {
+    console.error("Error agregando el proyecto:", error);
+  }
+};
 </script>
 
 <template>
@@ -106,15 +171,3 @@ const visibleStatuses = computed(() => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.btn-add-project[data-v-076d98d6]{
-    
-    @media screen and (max-width: 640px) {
-        background: red !important;
-        width: 100%;
-    }    
-}
-</style>
-
-<!-- Test -->

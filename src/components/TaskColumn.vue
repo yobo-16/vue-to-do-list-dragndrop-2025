@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import { defineProps, defineEmits } from 'vue'
 import { useDragAndDrop } from '@formkit/drag-and-drop/vue'
-// import { TrashIcon, PencilIcon } from '@heroicons/vue/24/outline'
+import { TrashIcon, PencilIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
     title: String,
@@ -71,13 +71,13 @@ const isOver = ref(false)
                 <div class="mt-2 flex gap-x-2">
                     <button @click="emit('edit-project', project)"
                         class="rounded bg-yellow-500 px-2 py-1 text-sm text-white flex">
-                        <!-- <TrashIcon  class="size-5 me-1"/> Edit -->
-                         Edit
+                        <PencilIcon  class="size-4 me-1"/> Edit
+
                     </button>
                     <button @click="emit('delete-project', project)"
                         class="rounded bg-red-600 px-2 py-1 text-sm text-white flex">
-                        <!-- <TrashIcon  class="size-5 me-1"/> Delete -->
-                         Delete
+                        <TrashIcon  class="size-5 me-1"/> Delete
+                         
                     </button>
                 </div>
             </div>
