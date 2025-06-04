@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { defineProps, defineEmits } from 'vue'
 import { useDragAndDrop } from '@formkit/drag-and-drop/vue'
+// import { TrashIcon, PencilIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
     title: String,
@@ -59,7 +60,7 @@ const isOver = ref(false)
         <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ title }}</h2>
         <div ref="container" class="min-h-[80px] flex flex-col gap-2">
             <div v-for="project in items" :key="project.id" class="draggable-item bg-white p-3 rounded-md shadow-sm ">
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between bg-gray-500">
                     <h3 class="text-md font-semibold text-gray-800">{{ project.title }}</h3>
                     <span :class="getBadgeClass(project.priority)">
                         {{ project.priority }}
@@ -69,12 +70,14 @@ const isOver = ref(false)
                 <p class="text-sm text-gray-400">{{ project.deadline }}</p>
                 <div class="mt-2 flex gap-x-2">
                     <button @click="emit('edit-project', project)"
-                        class="rounded bg-yellow-500 px-2 py-1 text-sm text-white">
-                        Edit
+                        class="rounded bg-yellow-500 px-2 py-1 text-sm text-white flex">
+                        <!-- <TrashIcon  class="size-5 me-1"/> Edit -->
+                         Edit
                     </button>
                     <button @click="emit('delete-project', project)"
-                        class="rounded bg-red-600 px-2 py-1 text-sm text-white">
-                        Delete
+                        class="rounded bg-red-600 px-2 py-1 text-sm text-white flex">
+                        <!-- <TrashIcon  class="size-5 me-1"/> Delete -->
+                         Delete
                     </button>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <script setup>
 import { defineEmits } from "vue";
+import { AdjustmentsHorizontalIcon } from '@heroicons/vue/24/solid'
 
 const emit = defineEmits(["filter-search", "filter-priority", "filter-status"]); // Emitir el texto del buscador, la prioridad y el status seleccionado
 </script>
@@ -18,7 +19,11 @@ const emit = defineEmits(["filter-search", "filter-priority", "filter-status"]);
 
       <!-- Filtros -->
       <div class="filter-container flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
-        <p class="text-sm text-gray-300">Filters:</p>
+        <div class="flex">
+          <AdjustmentsHorizontalIcon class="size-5 text-gray-300 me-1"/>
+          <p class="text-sm text-gray-300"> Filters:</p>
+        </div>
+        
 
         <!-- Filtro por prioridad -->
         <select
