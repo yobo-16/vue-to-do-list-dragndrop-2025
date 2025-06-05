@@ -39,7 +39,6 @@ watch(
                 <p class="mb-5">
                     Este es unn to-do list interactivo que he desarrollado con Vue.js y Pinia como proyexto final de un Bootcamp.
                 </p>
-                <!-- <button class="btn btn-primary">Get Started</button> -->
                 <RouterLink v-if="!user" class="btn  btn-outline-white" to="/auth">Comienza ahora</RouterLink>
                 <RouterLink v-if="user" class="btn  btn-outline-white" to="/projects">Comienza ahora</RouterLink>
             </div>

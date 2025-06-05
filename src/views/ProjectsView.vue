@@ -119,7 +119,7 @@ const handleAddProject = async (projectData) => {
 </script>
 
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen ">
     <!-- Barra del dashboard -->
     <DashboardBar
       @filter-search="searchQuery = $event"
