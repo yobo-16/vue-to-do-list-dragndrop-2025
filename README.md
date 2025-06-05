@@ -23,6 +23,7 @@ Este proyecto es una aplicación interactiva de lista de tareas (To-Do List) des
 
 - **Despliegue en producción**:
   - Aplicación desplegada en **Netlify**.
+  - **App**: [App Drang and Drop](https://drag-and-drop-vue-2025.netlify.app/)
 
 ---
 
