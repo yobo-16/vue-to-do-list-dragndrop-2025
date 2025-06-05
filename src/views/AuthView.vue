@@ -29,7 +29,7 @@ const closeModal = () => {
 <template>
   <div
     class="flex flex-col items-center justify-center h-screen bg-cover bg-center"
-    style="background-image: url('/src/img/laptop.jpg')"
+    style="background-image: url('../../public/img/laptop.jpg')"
   >
     <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
       <h3 class="font-bold text-lg mb-4">

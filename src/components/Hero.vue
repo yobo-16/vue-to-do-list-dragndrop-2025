@@ -25,7 +25,7 @@ watch(
 
 <template>
     <div class="hero min-h-screen"
-        style="background-image: url(src/img/desktop.jpg);">
+        style="background-image: url(../../public/img/laptop.jpg);">
         <div class="hero-overlay"></div>
         <div class="hero-content text-neutral-content text-center">
             <div class="max-w-md">
