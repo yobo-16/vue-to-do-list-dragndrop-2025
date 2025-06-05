@@ -15,8 +15,10 @@ watch(
   () => user.value,
   (newUser) => {
     if (newUser && newUser.email) {
-      email.value = newUser.email;
-    } 
+      email.value = newUser.email.split("@")[0];
+    } else{
+        email.value = "";
+    }
   },
   { immediate: true }
 );

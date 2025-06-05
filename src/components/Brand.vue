@@ -48,11 +48,13 @@
 
 <style scoped>
 img{
+    padding: 56px;
     transition: transform 0.5s ease;
     filter: grayscale();
 }
 
 img:hover {
+    padding: 24;
     transform: scale(1.1);
     filter: none;
 }
