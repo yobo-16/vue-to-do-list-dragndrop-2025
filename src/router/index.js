@@ -30,6 +30,21 @@ const router = createRouter({
       component: () => import('../components/Ejemplos.vue'),
 
     },
+    {
+      path: "/auth",
+      name: "auth",
+      component: () => import("../views/AuthView.vue"),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (authStore.user) {
+          // Redirección
+          next("/projects");
+        } else {
+          // Accesoa a /auth
+          next();
+        }
+      },
+    },
   ],
 });
 
