@@ -29,7 +29,7 @@ const closeModal = () => {
 <template>
   <div
     class="flex flex-col items-center justify-center h-screen bg-cover bg-center"
-    style="background-image: url('../img/bg/laptop.jpg')"
+    
   >
     <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
       <h3 class="font-bold text-lg mb-4">
@@ -94,5 +94,9 @@ const closeModal = () => {
 }
 .bg-center {
   background-position: center;
+}
+
+div.bg-cover{
+  background: url('https://i.ibb.co/k2Mm35V2/laptop.jpg');
 }
 </style>
