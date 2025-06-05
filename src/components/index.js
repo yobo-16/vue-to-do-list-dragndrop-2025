@@ -1,0 +1,10 @@
+export { default as Ejemplo } from "./Ejemplos.vue";
+export { default as TaskColumn } from "./TaskColumn.vue";
+export { default as AddProjectForm } from "./AddProjectForm.vue";
+export { default as EditProjectForm } from "./EditProjectForm.vue";
+export { default as DeleteProjectModal } from "./DeleteProjectModal.vue";
+export { default as DashboardBar } from "./DashboardBar.vue";
+export {default as Hero} from "./Hero.vue";
+export {default as ThreeColumns} from "./ThreeColumns.vue";
+export {default as Brand} from "./Brand.vue";
+export {default as HardToLearn} from "./HardToLearn.vue";

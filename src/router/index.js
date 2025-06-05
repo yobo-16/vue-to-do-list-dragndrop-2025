@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from "@/stores/auth";
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -12,12 +13,55 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+
       component: () => import('../views/AboutView.vue'),
     },
+    {
+      path: '/projects',
+      name: 'projects',
+      component: () => import('../views/ProjectsView.vue'),
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/ejemplos',
+      name: 'ejemplos',
+      component: () => import('../components/Ejemplos.vue'),
+
+    },
+    {
+      path: "/auth",
+      name: "auth",
+      component: () => import("../views/AuthView.vue"),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (authStore.user) {
+          // Redirección
+          next("/projects");
+        } else {
+          // Accesoa a /auth
+          next();
+        }
+      },
+    },
   ],
+});
+
+router.beforeEach(async(to, from, next)=>{
+  try {
+    const authStore = useAuthStore();
+    await authStore.fetchUser();
+    // Verifica el que el usuario esta autenticado authStore.user --> Puedes usar la variable isAuthenticated en auth.js pero debes modificar su comportamiento
+    if(to.meta.requiresAuth && !authStore.user ) {
+      next("/");
+
+    } else{
+      next();
+    }
+  } catch (error) {
+    console.error(error);
+  }
 })
 
 export default router
