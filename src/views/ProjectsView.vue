@@ -129,7 +129,7 @@ const handleAddProject = async (projectData) => {
       <template #add-project>
         <button
           @click="isModalOpen = true"
-          class="btn-add-project rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+          class="btn-add-project btn-outline-white rounded-md px-4 py-2 text-sm font-semibold text-white "
         >
           Add Project
         </button>
@@ -171,3 +171,19 @@ const handleAddProject = async (projectData) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+  .btn-outline-white {
+  border: 2px solid white !important;
+  background: none;
+  color: white;
+  border-radius: 9999px !important;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-white:hover {
+  background-color: white;
+  color: black;
+}
+</style>

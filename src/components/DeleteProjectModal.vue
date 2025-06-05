@@ -44,3 +44,9 @@ const closeModal = () => {
       </div>
     </div>
   </template>
+
+  <style scoped>
+  button{
+    border-radius: 32px;
+  }
+  </style>

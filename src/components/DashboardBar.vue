@@ -6,13 +6,12 @@ const emit = defineEmits(["filter-search", "filter-priority", "filter-status"]);
 </script>
 
 <template>
-  <nav class="bg-gray-800 text-white shadow-md top-16 left-0 w-full z-10">
+  <nav class="bg-black text-white shadow-md top-16 left-0 w-full z-10">
     <div class="flex flex-col sm:flex-row items-center justify-between px-4 py-2 gap-4">
       <!-- Botón Add Project -->
       <slot name="add-project">
         <button
-          class="px-4 py-2 rounded-md bg-indigo-600 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition w-full sm:w-auto"
-        >
+          class="px-4 py-2 rounded-md font-semibold text-white shadow-sm transition w-full btn-outline-white sm:w-auto">
           Add Project
         </button>
       </slot>
@@ -20,16 +19,14 @@ const emit = defineEmits(["filter-search", "filter-priority", "filter-status"]);
       <!-- Filtros -->
       <div class="filter-container flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
         <div class="flex">
-          <AdjustmentsHorizontalIcon class="size-5 text-gray-300 me-1"/>
-          <p class="text-sm text-gray-300"> Filters:</p>
+          <AdjustmentsHorizontalIcon class="size-5 text-white me-1" />
+          <p class="text-sm text-white"> Filters:</p>
         </div>
-        
+
 
         <!-- Filtro por prioridad -->
-        <select
-          @change="emit('filter-priority', $event.target.value)"
-          class="px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
-        >
+        <select @change="emit('filter-priority', $event.target.value)"
+          class="px-4 py-2 rounded-md bg-black border-white text-white focus:outline-none focus:ring-2 focus:white w-full sm:w-auto">
           <option value="">All Priorities</option>
           <option value="High">High</option>
           <option value="Medium">Medium</option>
@@ -37,10 +34,8 @@ const emit = defineEmits(["filter-search", "filter-priority", "filter-status"]);
         </select>
 
         <!-- Filtro por columnas -->
-        <select
-          @change="emit('filter-status', $event.target.value)"
-          class="filter-column px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
-        >
+        <select @change="emit('filter-status', $event.target.value)"
+          class="filter-column px-4 py-2 rounded-md bg-black border-white text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto">
           <option value="All Columns">All Columns</option>
           <option value="Backlog">Backlog</option>
           <option value="To do">To do</option>
@@ -49,28 +44,30 @@ const emit = defineEmits(["filter-search", "filter-priority", "filter-status"]);
         </select>
 
         <!-- Buscador -->
-        <input
-          type="text"
-          placeholder="Buscar..."
-          @input="emit('filter-search', $event.target.value)"
-          class="px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
-        />
+        <input type="text" placeholder="Buscar..." @input="emit('filter-search', $event.target.value)"
+          class="px-4 py-2 rounded-xxl bg-gray-900 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto" />
       </div>
     </div>
   </nav>
 </template>
 
 <style scoped>
-
 slot[name="add-project"] {
   width: 100%;
 }
+
+input, select{
+  border-radius: 32px;
+}
+
+
 
 @media (min-width: 640px) {
   slot[name="add-project"] {
     width: auto;
   }
-  .filter-column{
+
+  .filter-column {
     display: none;
   }
 }
@@ -99,7 +96,7 @@ slot[name="add-project"] {
     align-items: center;
   }
 
-  .filter-column{
+  .filter-column {
     display: auto;
   }
 }

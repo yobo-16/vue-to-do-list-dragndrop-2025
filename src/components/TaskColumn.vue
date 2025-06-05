@@ -75,7 +75,7 @@ const isOver = ref(false);
         :key="project.id"
         class="draggable-item bg-white p-3 rounded-md shadow-sm"
       >
-        <div class="flex items-center justify-between bg-gray-500">
+        <div class="flex items-center justify-between ">
           <h3 class="text-md font-semibold text-gray-800">{{ project.title }}</h3>
           <span :class="getBadgeClass(project.priority)">
             {{ project.priority }}
@@ -129,5 +129,9 @@ const isOver = ref(false);
 
 .draggable-item:active {
   cursor: grabbing;
+}
+
+button{
+    border-radius: 32px;
 }
 </style>

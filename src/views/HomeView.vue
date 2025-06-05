@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import AuthForm from "@/components/AuthForm.vue";
+import {Hero, ThreeColumns, Brand, HardToLearn} from "@/components";
 
 
 const showAuth = ref(false); // Controla la visibilidad del modal
@@ -21,24 +22,24 @@ const closeModal = () => {
 };
 </script>
 
-<template>
+<!-- <template>
   <div class="flex flex-col items-center justify-center h-screen">
-    <!-- Botón para abrir el modal -->
+    
     <button class="btn btn-primary" @click="showAuth = true">
       Iniciar Sesión / Registrarse
     </button>
 
-    <!-- Modal de DaisyUI -->
+    
     <div v-if="showAuth" class="modal modal-open">
       <div class="modal-box">
         <h3 class="font-bold text-lg">
           {{ isLogin ? "Iniciar Sesión" : "Registrarse" }}
         </h3>
 
-        <!-- Formulario de autenticación -->
+        
         <AuthForm :is-login="isLogin" @close-modal="closeModal" />
 
-        <!-- Botón para alternar entre login y registro -->
+        
         <div class="modal-action">
           <button class="btn btn-secondary" @click="toggleAuthMode">
             {{ isLogin ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión" }}
@@ -48,7 +49,14 @@ const closeModal = () => {
       </div>
     </div>
   </div>
-</template>
+</template> -->
 
+<template>
+  <Hero />
+  <ThreeColumns />
+  <Brand />
+  <HardToLearn />
+
+</template>
 <style scoped>
 </style>

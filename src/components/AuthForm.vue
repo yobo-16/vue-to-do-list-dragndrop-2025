@@ -53,12 +53,30 @@ const _handleSubmit = async () => {
       class="input input-bordered w-full"
       required
     />
-    <button type="submit" class="btn btn-primary w-full">
+    <button type="submit" class="btn w-full btn-inicio">
       {{ isLogin ? "Iniciar Sesión" : "Registrarse" }}
     </button>
   </form>
 </template>
 
 <style scoped>
+
+.btn-inicio{
+  /* border: 2px solid black !important; */
+  background-color: black;
+  color: white;
+  border-radius: 9999px !important;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-inicio:hover {
+  background-color: #5a5a5a;
+  color: white;
+}
+
+.input{
+  border-radius: 32px;
+}
 
 </style>
