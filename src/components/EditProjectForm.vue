@@ -138,7 +138,7 @@ const _handleSubmit = async () => {
           </button>
           <button
             type="submit"
-            class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline focus:outline-2 focus:outline-indigo-600"
+            class="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline focus:outline-2 focus:outline-indigo-600"
           >
             Save
           </button>
@@ -148,4 +148,8 @@ const _handleSubmit = async () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+  button{
+    border-radius: 32px;
+  }
+</style>
