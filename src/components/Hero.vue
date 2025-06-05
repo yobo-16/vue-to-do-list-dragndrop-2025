@@ -31,7 +31,7 @@ watch(
         <div class="hero-overlay"></div>
         <div class="hero-content text-neutral-content text-center">
             <div class="max-w-md">
-                <h1 class="mb-5 text-5xl font-normal">
+                <h1 class="mb-5 text-5xl  font-normal">
                     Hola
                     <br>
                     {{ email}}
@@ -51,6 +51,9 @@ watch(
 
 <style scoped>
 
+    h1{
+        line-height: 4rem;
+    }
     .btn-outline-white {
         border: 2px solid white !important;
         background: none;
